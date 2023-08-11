@@ -1,0 +1,18 @@
+.popup__auth-message {
+    line-height: 29px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #000;
+    text-align: center;
+    margin: 0 36px 60px;
+    padding: 0;
+}
+
+@media screen and (max-width: 1060px) {
+    .popup__auth-message {
+        max-width: 244px;
+        line-height: 24px;
+        font-size: 20px;
+        margin: 0 18px 50px;
+    }
+}

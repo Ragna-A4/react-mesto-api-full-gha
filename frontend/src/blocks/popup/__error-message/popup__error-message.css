@@ -1,0 +1,20 @@
+.popup__error-message {
+    width: 100%;
+    max-width: 358px;
+    min-height: 24px;
+    line-height: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #f00;
+    border: none;
+    margin: 0 auto;
+    opacity: 0;
+    display: flex;
+    transition: opacity 0.5 ease;
+}
+
+@media screen and (max-width: 1060px) {
+    .popup__error-message {
+        max-width: 238px;
+    }
+}

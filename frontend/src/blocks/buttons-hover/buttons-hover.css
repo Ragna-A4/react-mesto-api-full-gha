@@ -1,0 +1,9 @@
+.buttons-hover {
+    background-color: rgba(0, 0, 0, 0);
+    transition: opacity .2s linear;
+}
+
+.buttons-hover:hover {
+    opacity: 0.6;
+    transition: opacity .2s linear;
+}

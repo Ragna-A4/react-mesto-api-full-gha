@@ -1,0 +1,4 @@
+.profile__avatar_image {
+    position: absolute;
+    z-index: 1;
+}

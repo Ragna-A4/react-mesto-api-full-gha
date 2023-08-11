@@ -1,0 +1,26 @@
+.profile__user-name {
+    grid-area: name;
+    line-height: 48px;
+    font-size: 42px;
+    font-weight: 500;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    align-self: flex-end;
+    width: 294px;
+}
+
+@media screen and (max-width: 1060px) {
+    .profile__user-name {
+        line-height: 33px;
+        font-size: 27px;
+        margin-left: 26px;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile__user-name {
+        width: 189px;
+    }
+}

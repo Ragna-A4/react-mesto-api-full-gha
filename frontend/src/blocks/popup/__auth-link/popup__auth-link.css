@@ -1,0 +1,14 @@
+.popup__auth-link {
+    line-height: 16.94px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    margin: 15px auto;
+    text-align: center;
+}
+
+@media screen and (max-width: 1060px) {
+    .popup__auth-link {
+        margin-top: 20px;
+    }
+}

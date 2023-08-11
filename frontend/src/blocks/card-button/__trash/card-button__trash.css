@@ -1,0 +1,9 @@
+.card-button__trash {
+    background-image: url('../../../images/trash.svg');
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+}
