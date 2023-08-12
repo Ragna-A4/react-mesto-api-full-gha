@@ -3,22 +3,28 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookies = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, logout } = require('./controllers/users');
 const { checkAuthentication } = require('./middlewares/auth');
 const { validateUrl } = require('./utils/regular');
 const mainErrorHandler = require('./middlewares/errors');
 const NotFound = require('./errors/404_notfound');
 
-const { PORT = 3000, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
+const { PORT = 3001, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
 
 mongoose.connect(DB_URL, {
   useNewUrlParser: true,
 });
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 
 app.use(cookies());
 app.use(bodyParser.json());
@@ -46,6 +52,7 @@ app.post(
   }),
   login,
 );
+app.post('/logout', checkAuthentication, logout);
 app.use('/users', checkAuthentication, usersRouter);
 app.use('/cards', checkAuthentication, cardsRouter);
 app.use('*', (_req, _res, next) => {

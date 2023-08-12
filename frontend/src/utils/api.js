@@ -11,6 +11,8 @@ class Api {
 
   getCards() {
     return fetch(this._url + "/cards", {
+      method: "GET",
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkResult(res));
   }
@@ -18,6 +20,7 @@ class Api {
   addCard({ name, link }) {
     return fetch(this._url + "/cards", {
       method: "POST",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({ name, link }),
     }).then((res) => this._checkResult(res));
@@ -26,12 +29,15 @@ class Api {
   deleteCard(cardID) {
     return fetch(this._url + `/cards/${cardID}`, {
       method: "DELETE",
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkResult(res));
   }
 
   getProfile() {
     return fetch(this._url + "/users/me", {
+      method: "GET",
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkResult(res));
   }
@@ -39,31 +45,33 @@ class Api {
   patchProfile({ name, about }) {
     return fetch(this._url + "/users/me", {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({ name, about }),
     }).then((res) => this._checkResult(res));
   }
 
-  patchAvatar(avatar) {
+  patchAvatar({ avatar }) {
     return fetch(this._url + "/users/me/avatar", {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify(avatar),
+      body: JSON.stringify({ avatar }),
     }).then((res) => this._checkResult(res));
   }
 
   changeLikeCardStatus(cardID, isLiked) {
     return fetch(this._url + `/cards/${cardID}/likes`, {
       method: `${isLiked ? `PUT` : `DELETE`}`,
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkResult(res));
   }
 }
 
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-65",
+  url: "http://localhost:3001",
   headers: {
-    authorization: "7c5241b9-77fc-470b-9bc7-1667abece1a2",
     "Content-Type": "application/json",
   },
 });

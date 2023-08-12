@@ -116,12 +116,23 @@ function login(req, res, next) {
             return next(new Unauthorized());
           }
           const jwt = JWT.sign({ _id: user._id }, SECRET_KEY);
-          res.cookie('jwt', jwt, { expiresIn: '7d' });
+          res.cookie('jwt', jwt, {
+            expiresIn: '7d',
+            httpOnly: true,
+            sameSite: true,
+          });
 
           return res.status(200).send({ data: user.toJSON() });
         });
     })
     .catch(next);
+}
+
+function logout(_req, res) {
+  if (res.cookie) {
+    res.clearCookie('jwt');
+    res.send({ message: 'Вы вышли из аккаунта' });
+  }
 }
 
 module.exports = {
@@ -131,5 +142,6 @@ module.exports = {
   updateUserinfo,
   updateAvatar,
   login,
+  logout,
   getSelfInfo,
 };

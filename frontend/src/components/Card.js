@@ -4,8 +4,8 @@ import { useContext } from "react";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(currentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some((item) => item._id === currentUser._id);
+  const isOwn = card.owner === currentUser._id;
+  const isLiked = card.likes.some((item) => item === currentUser._id);
   const cardLikeButtonClassName = `card-button card-button__like buttons-hover buttons-hover_type_like ${
     isLiked && "card-button__like_active"
   }`;
@@ -15,6 +15,8 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   function handleCardLike() {
+    console.log(card);
+    console.log(card._id);
     onCardLike(card);
   }
 

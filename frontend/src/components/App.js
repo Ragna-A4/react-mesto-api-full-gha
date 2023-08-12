@@ -33,17 +33,13 @@ function App() {
   const [userEmail, setUserEmail] = useState({});
 
   const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) {
-      return;
-    }
     auth
-      .getContent(jwt)
+      .getContent()
       .then((data) => {
         if (!data) {
           return;
         }
-        setUserEmail(data.data.email);
+        setUserEmail(data.email);
         setIsLoggedIn(true);
         navigate("/");
       })
@@ -55,6 +51,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleSubmitRegistration(email, password) {
@@ -75,11 +72,7 @@ function App() {
   function handleSubmitLogin(email, password) {
     auth
       .authorize(email, password)
-      .then((data) => {
-        if (!data.token) {
-          return;
-        }
-        localStorage.setItem("jwt", data.token);
+      .then((_data) => {
         setUserEmail(email);
         setIsLoggedIn(true);
         navigate("/");
@@ -91,9 +84,17 @@ function App() {
       });
   }
 
-  function signOut() {
-    localStorage.removeItem("jwt");
-    navigate("/sign-in");
+  function signout() {
+    auth
+    .signout()
+    .then(res => {
+      if(res) {
+        setIsLoggedIn(false);
+        setCurrentUser({});
+        navigate("/sign-in", {replace: true});
+      }
+    })
+    .catch((err) => console.log(`Err: ${err}`));
   }
 
   const [currentUser, setCurrentUser] = useState({});
@@ -139,7 +140,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
@@ -155,7 +156,7 @@ function App() {
     api
       .deleteCard(card._id)
       .then(() => {
-        setCards((state) => state.filter((c) => c._id !== card._id));
+        setCards((state) => state.filter(c => c._id !== card._id));
       })
       .catch((err) => console.log(`Err: ${err}`));
   }
@@ -214,7 +215,7 @@ function App() {
                   onCardClick={handleCardClick}
                   onCardLike={handleCardLike}
                   onCardDelete={handleCardDelete}
-                  signOut={signOut}
+                  signOut={signout}
                   userEmail={userEmail}
                   cards={cards}
                   isLoggedIn={isLoggedIn}
