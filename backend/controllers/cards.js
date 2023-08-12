@@ -53,7 +53,7 @@ function likeCard(req, res, next) {
       if (!card) {
         return next(new NotFound());
       }
-      return res.status(200).send({ message: 'Карточке добавлен лайк' });
+      return res.status(200).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -73,7 +73,7 @@ function unlikeCard(req, res, next) {
       if (!card) {
         return next(new NotFound());
       }
-      return res.status(200).send({ message: 'У карточки удален лайк' });
+      return res.status(200).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

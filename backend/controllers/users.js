@@ -74,7 +74,7 @@ function updateUserinfo(req, res, next) {
       if (!user) {
         return next(new NotFound());
       }
-      return res.status(200).send({ data: user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
