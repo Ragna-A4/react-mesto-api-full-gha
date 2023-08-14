@@ -1,6 +1,6 @@
 class Api {
   constructor(config) {
-    this._url = config.url;
+    this.baseUrl = config.url;
     this._headers = config.headers;
   }
 
@@ -10,7 +10,7 @@ class Api {
   }
 
   getCards() {
-    return fetch(this._url + "/cards", {
+    return fetch(this.baseUrl + "/cards", {
       method: "GET",
       credentials: 'include',
       headers: this._headers,
@@ -18,7 +18,7 @@ class Api {
   }
 
   addCard({ name, link }) {
-    return fetch(this._url + "/cards", {
+    return fetch(this.baseUrl + "/cards", {
       method: "POST",
       credentials: 'include',
       headers: this._headers,
@@ -27,7 +27,7 @@ class Api {
   }
 
   deleteCard(cardID) {
-    return fetch(this._url + `/cards/${cardID}`, {
+    return fetch(this.baseUrl + `/cards/${cardID}`, {
       method: "DELETE",
       credentials: 'include',
       headers: this._headers,
@@ -35,7 +35,7 @@ class Api {
   }
 
   getProfile() {
-    return fetch(this._url + "/users/me", {
+    return fetch(this.baseUrl + "/users/me", {
       method: "GET",
       credentials: 'include',
       headers: this._headers,
@@ -43,7 +43,7 @@ class Api {
   }
 
   patchProfile({ name, about }) {
-    return fetch(this._url + "/users/me", {
+    return fetch(this.baseUrl + "/users/me", {
       method: "PATCH",
       credentials: 'include',
       headers: this._headers,
@@ -52,7 +52,7 @@ class Api {
   }
 
   patchAvatar({ avatar }) {
-    return fetch(this._url + "/users/me/avatar", {
+    return fetch(this.baseUrl + "/users/me/avatar", {
       method: "PATCH",
       credentials: 'include',
       headers: this._headers,
@@ -61,7 +61,7 @@ class Api {
   }
 
   changeLikeCardStatus(cardID, isLiked) {
-    return fetch(this._url + `/cards/${cardID}/likes`, {
+    return fetch(this.baseUrl + `/cards/${cardID}/likes`, {
       method: `${isLiked ? `PUT` : `DELETE`}`,
       credentials: 'include',
       headers: this._headers,
@@ -71,7 +71,7 @@ class Api {
 
 const api = new Api({
   // url: "http://localhost:3000",
-  url: "https://api.mesto.av4.nomoreparties.co",
+  baseUrl: "https://api.mesto.av4.nomoreparties.co",
   headers: {
     "Content-Type": "application/json",
   },
