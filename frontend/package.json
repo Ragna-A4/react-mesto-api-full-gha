@@ -16,7 +16,8 @@
     "start": "PORT=3030 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r ./build/* ragna-a4@51.250.10.73:/home/ragna-a4/react-mesto-api-full-gha/frontend"
   },
   "eslintConfig": {
     "extends": [

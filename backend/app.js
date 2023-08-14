@@ -25,7 +25,7 @@ const app = express();
 app.use(requestLogger);
 
 app.use(cors({
-  origin: 'http://localhost:3030',
+  origin: ['http://localhost:3030', 'https://mesto.av4.nomoreparties.co'],
   credentials: true,
 }));
 

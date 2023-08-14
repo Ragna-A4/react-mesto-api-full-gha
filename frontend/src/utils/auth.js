@@ -1,4 +1,5 @@
-export const baseUrl = "http://localhost:3000";
+// export const baseUrl = "http://localhost:3000";
+export const baseUrl = "https://api.mesto.av4.nomoreparties.co"
 
 function checkResult(res) {
   if (res.ok) return res.json();
