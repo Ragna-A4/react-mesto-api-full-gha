@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.10.73
+IP 51.250.10.73
 
 Frontend https://mesto.av4.nomoreparties.co
 
