@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:3001";
+export const baseUrl = "http://localhost:3000";
 
 function checkResult(res) {
   if (res.ok) return res.json();

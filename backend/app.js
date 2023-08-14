@@ -14,7 +14,7 @@ const mainErrorHandler = require('./middlewares/errors');
 const NotFound = require('./errors/404_notfound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
 
 mongoose.connect(DB_URL, {
   useNewUrlParser: true,
@@ -25,7 +25,7 @@ const app = express();
 app.use(requestLogger);
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3030',
   credentials: true,
 }));
 
