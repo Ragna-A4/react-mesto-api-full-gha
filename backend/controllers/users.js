@@ -6,7 +6,7 @@ const Unauthorized = require('../errors/401_unauthorized');
 const NotFound = require('../errors/404_notfound');
 const Conflict = require('../errors/409_conflict');
 
-const SECRET_KEY = 'secret';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 function getUsers(_req, res, next) {
   return User.find({})
@@ -115,7 +115,7 @@ function login(req, res, next) {
           if (!matched) {
             return next(new Unauthorized());
           }
-          const jwt = JWT.sign({ _id: user._id }, SECRET_KEY);
+          const jwt = JWT.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'secret');
           res.cookie('jwt', jwt, {
             expiresIn: '7d',
             httpOnly: true,

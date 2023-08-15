@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const Unauthorized = require('../errors/401_unauthorized');
 
-const SECRET_KEY = 'secret';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 function checkAuthentication(req, res, next) {
   const token = req.cookies.jwt;
@@ -12,7 +12,7 @@ function checkAuthentication(req, res, next) {
   let payload;
 
   try {
-    payload = jwt.verify(token, SECRET_KEY);
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret');
   } catch (err) {
     return next(new Unauthorized());
   }
